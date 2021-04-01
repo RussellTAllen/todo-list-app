@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO LIST</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>TODO LIST</h1>
+
+    <form action="/addItem" method="POST">
+        <input type="text" name="item" placeholder="Thing to do">
+        <input type="date" name="date">
+        <input type="submit">
+    </form>
+    
+    <ul class="todo-list">
+        
+        <% for(let i=0; i < info.length; i++) {%>
+            <li class="todo-item">
+                <span><%= info[i].item %></span>
+                <span><%= info[i].date %></span>                
+                <span><%= info[i].percent %></span>
+                <button id="delete">Completed!</button>
+            </li>
+        <% } %>
+    </ul>
+    
+    
+</body>
+</html>
