@@ -9,6 +9,8 @@
 </head>
 <body>
     <h1>TODO LIST</h1>
+    <h2>Today is <%= today %></h2>
+
 
     <form action="/addItem" method="POST">
         <input type="text" name="item" placeholder="Thing to do">
@@ -17,17 +19,22 @@
     </form>
     
     <ul class="todo-list">
-        
-        <% for(let i=0; i < info.length; i++) {%>
-            <li class="todo-item">
+    <% for(let i=0; i < info.length; i++) {%>
+        <li class="todo-item">
+            <% if(info[i].completed === true) {%>
+                <span class="completed"><%= info[i].item %></span>
+            <% }else{ %>
                 <span><%= info[i].item %></span>
-                <span><%= info[i].date %></span>                
-                <span><%= info[i].percent %></span>
-                <button id="delete">Completed!</button>
-            </li>
-        <% } %>
+            <% } %>
+            <span><%= info[i].date %></span>
+            <button class="delete">Remove Item</button>
+        </li>
+    <% } %>
     </ul>
+
+
     
     
+    <script src='js/main.js'></script>
 </body>
 </html>
