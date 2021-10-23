@@ -4,7 +4,7 @@ const deleteBtn = document.querySelectorAll('.delete')
 const todoItem = document.querySelectorAll('.todo-item span')
 const todoComplete = document.querySelectorAll('.todo-item span.completed')
 
-
+// Created these three variables for the POST test
 const item = document.querySelector('#item')
 const submitBtn = document.querySelector('#submit-btn')
 const todoList = document.querySelector('.todo-list')
@@ -43,9 +43,12 @@ async function createItem(e){
         if (response.status === 200){
             const li = document.createElement('li')
             const span = document.createElement('span')
+            li.classList.add('todo-item')
+            li.appendChild(span)
             li.appendChild(span)
             span.textContent = itemText
             todoList.appendChild(li)
+            li.addEventListener('click', () => console.log(this))
         }
     }
     catch(err){
@@ -77,6 +80,8 @@ async function removeItem(){
 
 async function markComplete(){
     const itemText = this.parentNode.childNodes[1].innerText
+    console.log(itemText)
+
     try{
         const response = await fetch('markComplete', {
             method: 'put',
