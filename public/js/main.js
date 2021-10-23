@@ -4,6 +4,13 @@ const deleteBtn = document.querySelectorAll('.delete')
 const todoItem = document.querySelectorAll('.todo-item span')
 const todoComplete = document.querySelectorAll('.todo-item span.completed')
 
+
+const item = document.querySelector('#item')
+const submitBtn = document.querySelector('#submit-btn')
+const todoList = document.querySelector('.todo-list')
+
+submitBtn.addEventListener('click', createItem)
+
 Array.from(deleteBtn).forEach(el =>{
     el.addEventListener('click', removeItem)
 })
@@ -15,6 +22,36 @@ Array.from(todoItem).forEach(el => {
 Array.from(todoComplete).forEach(el => {
     el.addEventListener('click', markUncomplete)
 })
+
+
+async function createItem(e){
+    e.preventDefault()
+
+    const itemText = String(item.value)
+
+    try{
+        const response = await fetch('/addItem', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                'item': itemText,
+            })
+        })
+
+        console.log(response.status === 200)
+
+        if (response.status === 200){
+            const li = document.createElement('li')
+            const span = document.createElement('span')
+            li.appendChild(span)
+            span.textContent = itemText
+            todoList.appendChild(li)
+        }
+    }
+    catch(err){
+        console.log(err)
+    }
+}
 
 async function removeItem(){
     const itemText = this.parentNode.childNodes[1].innerText
