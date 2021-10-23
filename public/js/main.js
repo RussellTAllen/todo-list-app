@@ -40,6 +40,8 @@ async function createItem(e){
 
         console.log(response.status === 200)
 
+        console.log(response)
+
         if (response.status === 200){
             const li = document.createElement('li')
             const span = document.createElement('span')

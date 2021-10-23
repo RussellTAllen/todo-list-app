@@ -32,7 +32,7 @@ app.post('/addItem', (req, res) => {
     db.collection('todo-list').insertOne({ item: req.body.item, date: req.body.date, completed: false })
     .then(result => {
         console.log('TODO item added')
-        res.json({ status: 201 })
+        res.json('Todo added')
     })
     .catch(err => console.error(err))
 })
